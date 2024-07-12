@@ -159,7 +159,6 @@ header div {
   position: relative;
   margin: 0 auto;
   width: 90%;
-  cursor: pointer;
   margin-bottom: 60px;
 }
 
@@ -199,6 +198,20 @@ header div {
   font-size: 14px;
   font-weight: 600;
   text-align: center;
+}
+
+.like {
+	position: absolute;
+	bottom: 60px;
+	left: 135px;
+	cursor: pointer;
+}
+
+.download {
+	position: absolute;
+	bottom: 60px;
+	right: 135px;
+	cursor: pointer;
 }
 
 .contact {

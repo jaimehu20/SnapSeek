@@ -32,3 +32,4 @@ export const searchSlice = createSlice({
 })
 
 export const fetchedImages = (state: RootState) => state.images.data;
+export const fetchStatus = (state: RootState) => state.images.status;
