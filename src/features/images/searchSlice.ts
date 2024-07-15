@@ -3,7 +3,7 @@ import type { RootState } from '../../app/store'
 import { getImages } from './searchThunk'
 
 export interface initialState {
-  data: object[],
+  data: any,
   status: string,
   error: string | null
 }
@@ -24,7 +24,7 @@ export const searchSlice = createSlice({
     }).addCase(getImages.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
-    }).addCase(getImages.fulfilled, (state, action: PayloadAction<object[]>) => {
+    }).addCase(getImages.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = "fulfilled";
         state.data = action.payload;
     })

@@ -18,20 +18,14 @@ export const MainContent = () => {
     alt_description: string;
 }
 
-
     const handleEmailClick = () => {
         window.open('mailto:jaimehu.dev@gmail.com');
-    }
-
-    const [url, setUrl ] = useState<string>("");
-
-    const handlePrinter = () => {
-      console.log()
     }
 
     const dispatch = useAppDispatch();
     const images: Image[] = useAppSelector(fetchedImages);
     const status = useAppSelector(fetchStatus);
+    const [ isFavorite, setFavorite ] = useState<boolean>(false)
 
     useEffect(() => {
       if (status === "idle") {
@@ -55,13 +49,20 @@ export const MainContent = () => {
                 <img src={info.url} alt={info.description}/>
                 <div className="overlay">
                     <div className="overlay-text">{info.description}</div>
-                    <Like />
+                    <Like 
+                        url={info.url} 
+                        width={info.width} 
+                        height={info.height} 
+                        likes={info.likes} 
+                        date={info.date} 
+                        description={info.description}
+                        isFavorite={isFavorite}
+                        setFavorite={setFavorite}  />
                     <Download />
                 </div>
             </div>
         )
     })
-
 
     return <>
         <main>

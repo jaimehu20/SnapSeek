@@ -1,8 +1,34 @@
-export const Like = () => {
+import React from "react";
+import { useAppDispatch } from "../../app/hooks";
+import { addFavorite } from "../../features/favorites/favoriteSlice";
+
+interface LikeProps {
+    url: string;
+    width: number;
+    height: number;
+    likes: number;
+    date: string;
+    description: string;
+    isFavorite: boolean;
+    setFavorite: any;
+}
+
+export const Like:React.FC<LikeProps> = ({ url, width, height, likes, date, description, isFavorite, setFavorite }) => {
+
+    const dispatch = useAppDispatch();
+    const image = {
+        url: url,
+        width: width,
+        height: height,
+        likes: likes,
+        date: date,
+        description
+    }
+
     return <>
-        <svg 
+        <svg onClick={() => {dispatch(addFavorite(image)); setFavorite(true)} }
         xmlns="http://www.w3.org/2000/svg" 
-        className="icon icon-tabler icon-tabler-heart-filled like" 
+        className={`icon icon-tabler icon-tabler-heart-filled like ${isFavorite ? 'favorite' : ''}`}
         width="30" 
         height="30" 
         viewBox="0 0 24 24" 
