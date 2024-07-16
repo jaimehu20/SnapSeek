@@ -25,7 +25,7 @@ export const MainContent = () => {
     const dispatch = useAppDispatch();
     const images: Image[] = useAppSelector(fetchedImages);
     const status = useAppSelector(fetchStatus);
-    const [ isFavorite, setFavorite ] = useState<boolean>(false)
+    const [favorites, setFavorites] = useState<string[]>([]);
 
     useEffect(() => {
       if (status === "idle") {
@@ -34,6 +34,14 @@ export const MainContent = () => {
         return
       }
     }, [dispatch, images])
+
+    const toggleFavorite = (url: string) => {
+        setFavorites((prevFavorites) => 
+          prevFavorites.includes(url) 
+            ? prevFavorites.filter((favoriteUrl) => favoriteUrl !== url)
+            : [...prevFavorites, url]
+        );
+      }
 
     const pictures = images.map((imagen: Image, index) => {
         const info = {
@@ -56,9 +64,9 @@ export const MainContent = () => {
                         likes={info.likes} 
                         date={info.date} 
                         description={info.description}
-                        isFavorite={isFavorite}
-                        setFavorite={setFavorite}  />
-                    <Download />
+                        isFavorite={favorites.includes(info.url)}
+                        toggleFavorite={() => toggleFavorite(info.url)}   />
+                    <Download url={info.url} description={info.description}/>
                 </div>
             </div>
         )

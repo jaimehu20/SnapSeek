@@ -9,11 +9,11 @@ interface LikeProps {
     likes: number;
     date: string;
     description: string;
-    isFavorite: boolean;
-    setFavorite: any;
+    isFavorite?: boolean;
+    toggleFavorite: () => void;
 }
 
-export const Like:React.FC<LikeProps> = ({ url, width, height, likes, date, description, isFavorite, setFavorite }) => {
+export const Like:React.FC<LikeProps> = ({ url, width, height, likes, date, description, isFavorite, toggleFavorite}) => {
 
     const dispatch = useAppDispatch();
     const image = {
@@ -26,7 +26,7 @@ export const Like:React.FC<LikeProps> = ({ url, width, height, likes, date, desc
     }
 
     return <>
-        <svg onClick={() => {dispatch(addFavorite(image)); setFavorite(true)} }
+        <svg onClick={() => {dispatch(addFavorite(image)); toggleFavorite()}}
         xmlns="http://www.w3.org/2000/svg" 
         className={`icon icon-tabler icon-tabler-heart-filled like ${isFavorite ? 'favorite' : ''}`}
         width="30" 

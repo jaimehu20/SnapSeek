@@ -1,6 +1,35 @@
-export const Download = () => {
+import React from "react"
+
+interface Download {
+    url: string,
+    description: string
+}
+
+export const Download:React.FC<Download> = ({url, description}) => {
+
+    const downloadImage = () => {
+        console.log(url)
+        fetch(url)
+            .then(response => response.blob())
+            .then(blob => {
+        
+        const imageUrl = window.URL.createObjectURL(new Blob([blob]));
+
+        const link = document.createElement('a');
+        link.href = imageUrl;
+        link.download = `${description}.jpg`;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        })
+            .catch(error => {
+                console.error('Error al descargar la imagen:', error);
+            });
+    };
+
     return <>
-        <svg 
+        <svg onClick={downloadImage}
             xmlns="http://www.w3.org/2000/svg" 
             className="icon icon-tabler icon-tabler-download download" 
             width="30" 

@@ -29,7 +29,7 @@ export const GalleryMainContent = () => {
                             likes={info.likes} 
                             date={info.date} 
                             description={info.description}  />
-                        <Download />
+                        <Download url={info.url} description={info.description}/>
                     </div>
                     <ul>
                         <li>{`${info.description}.`}</li>
