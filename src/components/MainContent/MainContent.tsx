@@ -25,7 +25,6 @@ export const MainContent = () => {
     const dispatch = useAppDispatch();
     const images: Image[] = useAppSelector(fetchedImages);
     const status = useAppSelector(fetchStatus);
-    const [favorites, setFavorites] = useState<string[]>([]);
 
     useEffect(() => {
       if (status === "idle") {
@@ -34,14 +33,6 @@ export const MainContent = () => {
         return
       }
     }, [dispatch, images])
-
-    const toggleFavorite = (url: string) => {
-        setFavorites((prevFavorites) => 
-          prevFavorites.includes(url) 
-            ? prevFavorites.filter((favoriteUrl) => favoriteUrl !== url)
-            : [...prevFavorites, url]
-        );
-      }
 
     const pictures = images.map((imagen: Image, index) => {
         const info = {
@@ -57,15 +48,7 @@ export const MainContent = () => {
                 <img src={info.url} alt={info.description}/>
                 <div className="overlay">
                     <div className="overlay-text">{info.description}</div>
-                    <Like 
-                        url={info.url} 
-                        width={info.width} 
-                        height={info.height} 
-                        likes={info.likes} 
-                        date={info.date} 
-                        description={info.description}
-                        isFavorite={favorites.includes(info.url)}
-                        toggleFavorite={() => toggleFavorite(info.url)}   />
+                    <Like info={info} />
                     <Download url={info.url} description={info.description}/>
                 </div>
             </div>

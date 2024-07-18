@@ -1,14 +1,11 @@
-import { useAppSelector } from "../../app/hooks"
-import { myPics } from "../../features/favorites/favoriteSlice"
 import { Download } from "../Icons/Download";
-import { EditIcon } from "../Icons/Edit";
 import { Like } from "../Icons/Like";
 
 export const GalleryMainContent = () => {
 
-    const favorites:object[] = useAppSelector(myPics);
+    const favorites = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
     
-    const pics = favorites.map((image, index) => {
+    const pics = favorites.map((image:any, index:number) => {
         const info = {
             url: image.url,
             width: image.width,
@@ -22,13 +19,7 @@ export const GalleryMainContent = () => {
                 <div className="main-gallery">
                     <img src={info.url} alt={info.description}/>
                     <div className="overlay overlay-gallery">
-                        <Like 
-                            url={info.url} 
-                            width={info.width} 
-                            height={info.height} 
-                            likes={info.likes} 
-                            date={info.date} 
-                            description={info.description}  />
+                        <Like info={info}/>
                         <Download url={info.url} description={info.description}/>
                     </div>
                     <ul>
@@ -36,7 +27,6 @@ export const GalleryMainContent = () => {
                         <li>{`Width: ${info.width}px`}</li>
                         <li>{`Height: ${info.height}px`}</li>
                         <li>{`Likes: ${info.likes}`}</li>
-                        <li>{`Date: ${info.date.slice(0, 10)}`}</li>
                     </ul>
                 </div>
             </>
