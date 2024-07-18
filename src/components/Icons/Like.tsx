@@ -13,9 +13,11 @@ interface Info {
 
 interface ImageInfo {
     info?: Info
+    index?: number
+    toggleImg?: (index:number) => void
 }
 
-export const Like:React.FC<ImageInfo> = ({ info }) => {
+export const Like:React.FC<ImageInfo> = ({ info, toggleImg, index }) => {
 
     const dispatch = useAppDispatch();
     const image = {
@@ -39,9 +41,12 @@ export const Like:React.FC<ImageInfo> = ({ info }) => {
         if (favorites.includes(image.url)){
             setFavorite(false)
             dispatch(removeFavorite(image))
+            if (toggleImg && index) toggleImg(index)
+            
         } else {
             setFavorite(true)
             dispatch(addFavorite(image))
+            if (toggleImg && index) toggleImg(index)
         }
     }
 
@@ -62,5 +67,3 @@ export const Like:React.FC<ImageInfo> = ({ info }) => {
         </svg>
     </>
 }
-
-// className={`icon icon-tabler icon-tabler-heart-filled like ${isFavorite ? 'favorite' : ''}`}
