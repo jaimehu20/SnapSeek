@@ -16,7 +16,7 @@ export const Navbar = () => {
                 <div className='nav-options'>
                     <ul>
                         <li>
-                            <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>
+                            <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>
                                 Inicio
                             </NavLink>
                         </li>
@@ -38,7 +38,7 @@ export const Navbar = () => {
                 <div>
                     <ul>
                         <li>
-                            <NavLink to="/home" className={({ isActive }) => isActive ? 'active' : ''}>
+                            <NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>
                                 Inicio
                             </NavLink>
                         </li>

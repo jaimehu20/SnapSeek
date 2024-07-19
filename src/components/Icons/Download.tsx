@@ -8,7 +8,6 @@ interface Download {
 export const Download:React.FC<Download> = ({url, description}) => {
 
     const downloadImage = () => {
-        console.log(url)
         fetch(url)
             .then(response => response.blob())
             .then(blob => {

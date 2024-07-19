@@ -25,9 +25,19 @@ export const favoriteSlice = createSlice({
         removeFavorite: (state, action) => {
             state.favoritePics = state.favoritePics.filter((pic:any) => pic.url !== action.payload.url )
             localStorage.setItem("favoritePhotos", JSON.stringify(state.favoritePics));
+        },
+        editDescription: (state, action) => {
+            state.favoritePics.map((element:any, index:number) => {
+                if (element.url === action.payload.url){
+                   state.favoritePics.splice(index, 1)
+                   action.payload.description = action.payload.updatedInfo
+                   state.favoritePics = [...state.favoritePics,action.payload]
+                   localStorage.setItem("favoritePhotos", JSON.stringify([...state.favoritePics]))
+                }
+            })
         }
     }
 })
 
-export const { addFavorite, removeFavorite } = favoriteSlice.actions;
+export const { addFavorite, removeFavorite, editDescription } = favoriteSlice.actions;
 export const myPics = (state: RootState) => state.favorites.favoritePics;

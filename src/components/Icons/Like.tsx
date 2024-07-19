@@ -13,11 +13,10 @@ interface Info {
 
 interface ImageInfo {
     info?: Info
-    index?: number
-    toggleImg?: (index:number) => void
+    setShouldUpdate?: any
 }
 
-export const Like:React.FC<ImageInfo> = ({ info, toggleImg, index }) => {
+export const Like:React.FC<ImageInfo> = ({ info, setShouldUpdate }) => {
 
     const dispatch = useAppDispatch();
     const image = {
@@ -41,12 +40,10 @@ export const Like:React.FC<ImageInfo> = ({ info, toggleImg, index }) => {
         if (favorites.includes(image.url)){
             setFavorite(false)
             dispatch(removeFavorite(image))
-            if (toggleImg && index) toggleImg(index)
-            
+            setShouldUpdate(true)
         } else {
             setFavorite(true)
             dispatch(addFavorite(image))
-            if (toggleImg && index) toggleImg(index)
         }
     }
 
