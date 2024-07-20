@@ -4,15 +4,15 @@ import { useAppDispatch } from "../../app/hooks"
 
 interface Info {
     info: {}
-    setShowModal: any
+    onEdit: any
 }
 
-export const Edit:React.FC<Info> = ({ info, setShowModal }) => {
+export const Edit:React.FC<Info> = ({ info, onEdit }) => {
 
     const dispatch = useAppDispatch();
     
     return <>
-        <svg onClick={() => {setShowModal(true);}}
+        <svg onClick={onEdit}
             xmlns="http://www.w3.org/2000/svg"  
             width="20"  
             height="20"  

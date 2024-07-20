@@ -11,6 +11,7 @@ export const GalleryMainContent = () => {
     const [ prueba, setPrueba ] = useState<[]>([])
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [ showModal, setShowModal ] = useState<boolean>(false)
+    const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
     useEffect(() => {
       const favorites = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
@@ -46,14 +47,16 @@ export const GalleryMainContent = () => {
                         <Download url={info.url} description={info.description}/>
                     </div>
                         <ul>
-                            <li>{`${info.description}.`}<Edit info={info} setShowModal={setShowModal}/></li>
+                            <li>{`${info.description}.`}<Edit info={info} onEdit={() => setSelectedImageIndex(index)}/></li>
                             <li>{`Width: ${info.width}px`}</li>
                             <li>{`Height: ${info.height}px`}</li>
                             <li>{`Likes: ${info.likes}`}</li>
                             <li>{`Date ${info.date.slice(0, 10)}`}</li>
                         </ul>
                 </div>
-                <Modal showModal={showModal} setShowModal={setShowModal} info={info}/>
+                {selectedImageIndex === index && (
+                    <Modal showModal={true} setShowModal={() => setSelectedImageIndex(null)} info={info} />
+                )}
             </>
         )
     })

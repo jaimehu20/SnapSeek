@@ -17,7 +17,7 @@ export const Modal:React.FC<any> = ({ showModal, setShowModal, info }) => {
             <div className="modal-editor">
                 <p>{"La descripción de la foto es:"}</p>
                 <em>{`"${info.description}"`}</em>
-                <p>Si quieres camibar la descripción, introdúcela en el siguiente campo:</p>
+                <p>Si quieres cambiar la descripción, introdúcela en el siguiente campo:</p>
                 <input type="text" placeholder={info.description} />
             </div>
             <button onClick={handleClick}>Editar descripción</button>
