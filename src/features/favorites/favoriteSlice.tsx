@@ -28,10 +28,10 @@ export const favoriteSlice = createSlice({
         },
         editDescription: (state, action) => {
             state.favoritePics.map((element:any, index:number) => {
-                if (element.url === action.payload.url){
+                if (element.url === action.payload.image.url){
                    state.favoritePics.splice(index, 1)
-                   action.payload.description = action.payload.updatedInfo
-                   state.favoritePics = [...state.favoritePics,action.payload]
+                   action.payload.image.description = action.payload.description
+                   state.favoritePics = [...state.favoritePics,action.payload.image]
                    localStorage.setItem("favoritePhotos", JSON.stringify([...state.favoritePics]))
                 }
             })

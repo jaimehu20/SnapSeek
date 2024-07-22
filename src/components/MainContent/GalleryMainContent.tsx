@@ -55,7 +55,7 @@ export const GalleryMainContent = () => {
                         </ul>
                 </div>
                 {selectedImageIndex === index && (
-                    <Modal showModal={true} setShowModal={() => setSelectedImageIndex(null)} info={info} />
+                    <Modal showModal={true} setShowModal={() => setSelectedImageIndex(null)} info={info} setShouldUpdate={setShouldUpdate}/>
                 )}
             </>
         )
