@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getImages } from "../../features/images/searchThunk";
-import { fetchedImages, fetchStatus } from "../../features/images/searchSlice";
+import { fetchedImages, fetchStatus, searchedImages } from "../../features/images/searchSlice";
 import { Like } from "../Icons/Like";
 import { Download } from "../Icons/Download";
 
@@ -25,6 +25,7 @@ export const MainContent = () => {
     const dispatch = useAppDispatch();
     const images: Image[] = useAppSelector(fetchedImages);
     const status = useAppSelector(fetchStatus);
+    const search = useAppSelector(searchedImages);
 
     useEffect(() => {
       if (status === "idle") {
@@ -34,14 +35,35 @@ export const MainContent = () => {
       }
     }, [dispatch, images])
 
-    const pictures = images.map((imagen: Image, index) => {
+    const pictures = images.map((img: Image, index:number) => {
         const info = {
-            url: imagen.urls.regular,
-            width: imagen.width,
-            height: imagen.height,
-            likes: imagen.likes,
-            date: imagen.created_at,
-            description: imagen.alt_description
+            url: img.urls.regular,
+            width: img.width,
+            height: img.height,
+            likes: img.likes,
+            date: img.created_at,
+            description: img.alt_description
+        }
+        return (
+            <div className="main">
+                <img src={info.url} alt={info.description}/>
+                <div className="overlay">
+                    <div className="overlay-text">{info.description}</div>
+                    <Like info={info} />
+                    <Download url={info.url} description={info.description}/>
+                </div>
+            </div>
+        )
+    })
+
+    const prueba = search.map((img: Image, index:number) => {
+        const info = {
+            url: img.urls.regular,
+            width: img.width,
+            height: img.height,
+            likes: img.likes,
+            date: img.created_at,
+            description: img.alt_description
         }
         return (
             <div className="main">
@@ -57,7 +79,11 @@ export const MainContent = () => {
 
     return <>
         <main>
-            {pictures}  
+            {pictures.length === 0 ? (
+                <p>Loading...</p>
+            ) : (
+                prueba.length === 0 ? pictures : prueba
+            )}
             <section className="contact">
                 <div>
                     <h2>Contáctame</h2>
