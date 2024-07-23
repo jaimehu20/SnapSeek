@@ -8,19 +8,20 @@ import { Modal } from "../Modal/Modal";
 export const GalleryMainContent = () => {
 
     
-    const [ prueba, setPrueba ] = useState<[]>([])
+    const [ myPics, setMyPics ] = useState<[]>([])
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [ showModal, setShowModal ] = useState<boolean>(false)
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
+    const [ sortBy, setSortBy ] = useState<string>("");
 
     useEffect(() => {
       const favorites = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
-      setPrueba(favorites);
+      setMyPics(favorites);
     }, []);
 
     useEffect(() => {
         if (shouldUpdate) {
-          setPrueba((prevPrueba) => {
+          setMyPics((prevMypics) => {
             const updatedFavorites = JSON.parse(localStorage.getItem('favoritePhotos') || '[]');
             return updatedFavorites;
           });
@@ -28,7 +29,20 @@ export const GalleryMainContent = () => {
         }
       }, [shouldUpdate]);
 
-    const pics = prueba.map((image:any, index:number) => {
+    const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortBy(event.target.value);
+    }
+
+    const sortedPics = sortBy ? [...myPics].sort((a: any, b: any) => {
+        if (sortBy === 'fecha') {
+            return new Date(a.date).getTime() - new Date(b.date).getTime();
+        } else if (sortBy === 'likes') {
+            return a.likes - b.likes;
+        }
+        return 0;
+    }) : myPics;
+
+    const pics = sortedPics.map((image:any, index:number) => {
         const info = {
             url: image.url,
             width: image.width,
@@ -39,20 +53,20 @@ export const GalleryMainContent = () => {
         }
 
         return (
-            <>
+            <>  
                 <div className='main-gallery' key={index}>
                     <img src={info.url} alt={info.description}/>
                     <div className="overlay overlay-gallery">
                         <Like info={info} setShouldUpdate={setShouldUpdate}/>
                         <Download url={info.url} description={info.description}/>
                     </div>
-                        <ul>
+                    <ul>
                             <li>{`${info.description}.`}<Edit info={info} onEdit={() => setSelectedImageIndex(index)}/></li>
                             <li>{`Width: ${info.width}px`}</li>
                             <li>{`Height: ${info.height}px`}</li>
                             <li>{`Likes: ${info.likes}`}</li>
                             <li>{`Date ${info.date.slice(0, 10)}`}</li>
-                        </ul>
+                    </ul>
                 </div>
                 {selectedImageIndex === index && (
                     <Modal showModal={true} setShowModal={() => setSelectedImageIndex(null)} info={info} setShouldUpdate={setShouldUpdate}/>
@@ -63,7 +77,14 @@ export const GalleryMainContent = () => {
 
     return <>
         <main>
-            {prueba.length === 0 ? <EmptyGallery /> : pics}
+            <div className="select">
+                <select onChange={handleSelect}>
+                    <option value="" disabled selected>Ordenar por</option>
+                    <option value="fecha" >Fecha</option>
+                    <option value="likes">Likes</option>
+                </select>
+            </div>
+            {myPics.length === 0 ? <EmptyGallery /> : pics}
         </main>
     </>
 }

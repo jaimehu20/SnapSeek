@@ -1,5 +1,11 @@
 export const EmptyGallery = () => {
     return <>
-        <p>Oops, no hay na por aquí...</p>
+        <div className="empty">
+            <img src="../../../public/cam.png" />
+            <p>
+                ¡Oops! Parece que aún no has guardado ninguna foto en favoritos.
+                ¡Vuelve a <a href="/">Inicio</a> para empezar a crear tu biblioteca!
+            </p>
+        </div>
     </>
 }

@@ -221,6 +221,20 @@ header div {
   max-width: 558px;
 }
 
+.select {
+	display: flex;
+	justify-content: end;
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 22px;
+}
+
+select {
+	border-radius: 8px;
+	background: #EAE6E1;
+	border: 1px solid #A74D4A;
+}
+
 .main-gallery {
 	position: relative;
 	margin: 0 auto;
@@ -345,6 +359,30 @@ header div {
 .contact {
 	text-align: center;
 	margin-bottom: 100px;
+}
+
+.empty {
+	width: 90%;
+	margin: 0 auto;
+	max-width: 558px;
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 60px;
+	text-align: center;
+}
+
+.empty img {
+	width: 100px;
+	transform: rotate(28deg);
+}
+
+.empty p {
+	font-family: 'Roboto Condensed';
+}
+
+.empty a {
+	text-decoration: underline;
+	text-decoration-color: #A74D4A;
 }
 
 .contact div {
@@ -503,6 +541,10 @@ footer svg {
 		max-width: 1098px;
 	}
 
+	.select {
+		grid-column: span 2;
+	}
+
 	.main-gallery {
 		max-width: 1098px;
 	}
@@ -521,6 +563,10 @@ footer svg {
 
 	.main svg {
 		bottom: 150px;
+	}
+
+	.empty {
+		grid-column: span 2;
 	}
 
 	.contact {
