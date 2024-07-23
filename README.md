@@ -10,11 +10,11 @@ Las tecnologías utilizadas son:
 
 ⚡ FUNCIONALIDADES ⚡
 
-Llamada a API: Se hace una llamada inicial a la API de UnSplash para mostrar 10 imágenes y a demás, se pueden buscar imágenes por nombre o descripción.
-Favoritos : Las imágenes se pueden marcar como favoritos y se irán acumulando sin límite en la sección Mi Galería.
-Descarga : Las imágenes también cuentan con un botón download, que nos permite descargar la imagen en alta definición.
-Mi galería : En esta sección, se mostrarán nuestras imágenes marcadas como favoritas junto con información relevante (descripción, width, height, likes y fecha de creación). Si lo necesitas, puedes cambiar la descripción de la imagen por una que te guste más pulsando el lápiz de cada imagen.
-Sort by : En la página de favoritos, encontrarás un selector que te permitirá ordenar tus fotos favoritas por fecha de creación o por número de "me gusta" (por defecto, aparecen siguiendo el orden en que se añadieron a favoritos).
+- Llamada a API: Se hace una llamada inicial a la API de UnSplash para mostrar 10 imágenes y a demás, se pueden buscar imágenes por nombre o descripción.
+- Favoritos : Las imágenes se pueden marcar como favoritos y se irán acumulando sin límite en la sección Mi Galería.
+- Descarga : Las imágenes también cuentan con un botón download, que nos permite descargar la imagen en alta definición.
+- Mi galería : En esta sección, se mostrarán nuestras imágenes marcadas como favoritas junto con información relevante (descripción, width, height, likes y fecha de creación). Si lo necesitas, puedes cambiar la descripción de la imagen por una que te guste más pulsando el lápiz de cada imagen.
+- Sort by : En la página de favoritos, encontrarás un selector que te permitirá ordenar tus fotos favoritas por fecha de creación o por número de "me gusta" (por defecto, aparecen siguiendo el orden en que se añadieron a favoritos).
 
 Si quieres visitar la aplicación, este es su enlace:
 💻 https://snapseek-web.netlify.app/ 💻
