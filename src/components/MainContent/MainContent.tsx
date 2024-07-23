@@ -4,6 +4,7 @@ import { getImages } from "../../features/images/searchThunk";
 import { fetchedImages, fetchStatus, searchedImages } from "../../features/images/searchSlice";
 import { Like } from "../Icons/Like";
 import { Download } from "../Icons/Download";
+import { LoadingContent } from "../Icons/LoadingContent";
 
 export const MainContent = () => {
 
@@ -56,7 +57,7 @@ export const MainContent = () => {
         )
     })
 
-    const prueba = search.map((img: Image, index:number) => {
+    const customPics = search.map((img: Image, index:number) => {
         const info = {
             url: img.urls.regular,
             width: img.width,
@@ -80,9 +81,11 @@ export const MainContent = () => {
     return <>
         <main>
             {pictures.length === 0 ? (
-                <p>Loading...</p>
+                <div className="loading">
+                    <LoadingContent />
+                </div>
             ) : (
-                prueba.length === 0 ? pictures : prueba
+                customPics.length === 0 ? pictures : customPics
             )}
             <section className="contact">
                 <div>
