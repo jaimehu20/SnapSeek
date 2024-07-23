@@ -30,7 +30,7 @@ export const favoriteSlice = createSlice({
             state.favoritePics.map((element:any, index:number) => {
                 if (element.url === action.payload.image.url){
                    state.favoritePics.splice(index, 1)
-                   if (action.payload.image.description.length === 0) {
+                   if (action.payload.description.length === 0) {
                     action.payload.image.description = element.description
                    } else {
                     action.payload.image.description = action.payload.description
