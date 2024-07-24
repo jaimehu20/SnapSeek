@@ -1,15 +1,23 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Download } from "../Icons/Download";
 import { Like } from "../Icons/Like";
 import { Edit } from "../Icons/Edit";
 import { EmptyGallery } from "./EmptyGallery";
 import { Modal } from "../Modal/Modal";
 
-export const GalleryMainContent = () => {
+interface Image {
+    url: string;
+    width: number;
+    height: number;
+    likes: number;
+    date: string;
+    description: string;
+}
 
-    
-    const [ myPics, setMyPics ] = useState<[]>([])
-    const [shouldUpdate, setShouldUpdate] = useState(false);
+export const GalleryMainContent : React.FC = () => {
+
+    const [ myPics, setMyPics ] = useState<Image[]>([])
+    const [shouldUpdate, setShouldUpdate] = useState<boolean>(false);
     const [ showModal, setShowModal ] = useState<boolean>(false)
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
     const [ sortBy, setSortBy ] = useState<string>("");
@@ -61,7 +69,7 @@ export const GalleryMainContent = () => {
                         <Download url={info.url} description={info.description}/>
                     </div>
                     <ul>
-                            <li>{`${info.description}.`}<Edit info={info} onEdit={() => setSelectedImageIndex(index)}/></li>
+                            <li>{`${info.description}.`}<Edit onEdit={() => setSelectedImageIndex(index)}/></li>
                             <li>{`Width: ${info.width}px`}</li>
                             <li>{`Height: ${info.height}px`}</li>
                             <li>{`Likes: ${info.likes}`}</li>

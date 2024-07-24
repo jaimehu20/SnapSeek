@@ -1,8 +1,8 @@
-import { useState } from "react"
+import React, { FormEvent, useState } from "react"
 import { useAppDispatch } from "../../app/hooks";
 import { imageSearch } from "../../features/images/searchThunk";
 
-export const Header = () => {
+export const Header : React.FC = () => {
 
     const dispatch = useAppDispatch();
     const [ searchPattern, setSearchPattern ] = useState<string>("");
@@ -11,7 +11,7 @@ export const Header = () => {
         setSearchPattern(event.target.value);
     }
 
-    const handleSearch = (event: any) => {
+    const handleSearch = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(imageSearch(searchPattern))
     }

@@ -3,7 +3,18 @@ import { Close } from "../Icons/Close"
 import { editDescription } from "../../features/favorites/favoriteSlice"
 import { useAppDispatch } from "../../app/hooks"
 
-export const Modal:React.FC<any> = ({ showModal, setShowModal, info, setShouldUpdate }) => {
+interface Info {
+    description: string;
+}
+
+interface ModalProps {
+    showModal: boolean;
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+    info: Info;
+    setShouldUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Modal:React.FC<ModalProps> = ({ showModal, setShowModal, info, setShouldUpdate }) => {
 
     const dispatch = useAppDispatch();
     const [ newDescription, setNewDescription ] = useState<string>("")

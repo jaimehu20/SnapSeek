@@ -1,4 +1,6 @@
-export const EmptyGallery = () => {
+import React from "react"
+
+export const EmptyGallery: React.FC = () => {
     return <>
         <div className="empty">
             <img src="/cam.png" />

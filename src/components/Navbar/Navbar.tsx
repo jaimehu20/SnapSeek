@@ -1,10 +1,11 @@
+import React from 'react'
 import { Pivot as Hamburger } from 'hamburger-react'
 import { useState } from 'react'
 import { Github } from '../Icons/Github'
 import { Linkedin } from '../Icons/Linkedin'
 import { NavLink } from 'react-router-dom'
 
-export const Navbar = () => {
+export const Navbar : React.FC = () => {
     const [ isOpen, setOpen ] = useState<boolean>(false)
 
     const toggleMenu = () => {

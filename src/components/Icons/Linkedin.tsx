@@ -1,4 +1,6 @@
-export const Linkedin = () => {
+import React from "react"
+
+export const Linkedin : React.FC = () => {
     return <>
     <a href="https://www.linkedin.com/in/jaime-hurtado-ure%C3%B1a-b70789296/" target="_blank">
         <svg 

@@ -1,32 +1,22 @@
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { getImages } from "../../features/images/searchThunk";
 import { fetchedImages, fetchStatus, searchedImages } from "../../features/images/searchSlice";
 import { Like } from "../Icons/Like";
 import { Download } from "../Icons/Download";
 import { LoadingContent } from "../Icons/LoadingContent";
+import { ImageFromAPI } from "../../utils/interfaces";
 
-export const MainContent = () => {
-
-  interface Image {
-    urls: {
-        regular: string;
-    };
-    width: number;
-    height: number;
-    likes: number;
-    created_at: string;
-    alt_description: string;
-}
+export const MainContent : React.FC = () => {
 
     const handleEmailClick = () => {
         window.open('mailto:jaimehu.dev@gmail.com');
     }
 
     const dispatch = useAppDispatch();
-    const images: Image[] = useAppSelector(fetchedImages);
-    const status = useAppSelector(fetchStatus);
-    const search = useAppSelector(searchedImages);
+    const images: ImageFromAPI[] = useAppSelector(fetchedImages);
+    const status : string = useAppSelector(fetchStatus);
+    const search : ImageFromAPI[] = useAppSelector(searchedImages);
 
     useEffect(() => {
       if (status === "idle") {
@@ -36,7 +26,7 @@ export const MainContent = () => {
       }
     }, [dispatch, images])
 
-    const pictures = images.map((img: Image, index:number) => {
+    const pictures = images.map((img: ImageFromAPI, index:number) => {
         const info = {
             url: img.urls.regular,
             width: img.width,
@@ -57,7 +47,7 @@ export const MainContent = () => {
         )
     })
 
-    const customPics = search.map((img: Image, index:number) => {
+    const customPics = search.map((img: ImageFromAPI, index:number) => {
         const info = {
             url: img.urls.regular,
             width: img.width,

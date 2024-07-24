@@ -13,7 +13,7 @@ interface Info {
 
 interface ImageInfo {
     info?: Info
-    setShouldUpdate?: any
+    setShouldUpdate?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Like:React.FC<ImageInfo> = ({ info, setShouldUpdate }) => {
@@ -37,7 +37,7 @@ export const Like:React.FC<ImageInfo> = ({ info, setShouldUpdate }) => {
     }, [image.url]);
 
     const handleClick = () => {
-        if (favorites.includes(image.url)){
+        if (favorites.includes(image.url) && setShouldUpdate){
             setFavorite(false)
             dispatch(removeFavorite(image))
             setShouldUpdate(true)

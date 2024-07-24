@@ -1,16 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 
+interface favoritePhoto {
+    url: string,
+    height: number,
+    width: number,
+    likes: number,
+    date: string,
+    description: string
+}
+
+interface FavoriteState {
+    favoritePics: favoritePhoto[];
+  }
+
 const storedFavorites = localStorage.getItem("favoritePhotos");
-const initialFavorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+const initialFavorites : favoritePhoto[] = storedFavorites ? JSON.parse(storedFavorites) : [];
 
 export const favoriteSlice = createSlice({
     name: "favorite",
     initialState: {
-        favoritePics : initialFavorites
-    },
+        favoritePics : initialFavorites,
+    } as FavoriteState,
     reducers: {
-        addFavorite: (state, action) => {
+        addFavorite: (state, action: PayloadAction<favoritePhoto>) => {
             let exists:boolean = false;
             state.favoritePics && state.favoritePics.map((element:any, index: any) => {
                 if (element.url === action.payload.url) {
@@ -22,12 +35,12 @@ export const favoriteSlice = createSlice({
                 localStorage.setItem("favoritePhotos", JSON.stringify(state.favoritePics))
             }
         },
-        removeFavorite: (state, action) => {
+        removeFavorite: (state, action : PayloadAction<{ url: string }>) => {
             state.favoritePics = state.favoritePics.filter((pic:any) => pic.url !== action.payload.url )
             localStorage.setItem("favoritePhotos", JSON.stringify(state.favoritePics));
         },
-        editDescription: (state, action) => {
-            state.favoritePics.map((element:any, index:number) => {
+        editDescription: (state, action : PayloadAction<{ image: favoritePhoto; description: string }>) => {
+            state.favoritePics.map((element: favoritePhoto, index:number) => {
                 if (element.url === action.payload.image.url){
                    state.favoritePics.splice(index, 1)
                    if (action.payload.description.length === 0) {

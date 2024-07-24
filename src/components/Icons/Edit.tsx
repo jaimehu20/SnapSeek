@@ -1,15 +1,10 @@
 import React from "react"
-import { editDescription } from "../../features/favorites/favoriteSlice"
-import { useAppDispatch } from "../../app/hooks"
 
-interface Info {
-    info: {}
-    onEdit: any
+interface EditProps {
+    onEdit: () => void;
 }
 
-export const Edit:React.FC<Info> = ({ info, onEdit }) => {
-
-    const dispatch = useAppDispatch();
+export const Edit:React.FC<EditProps> = ({ onEdit }) => {
     
     return <>
         <svg onClick={onEdit}

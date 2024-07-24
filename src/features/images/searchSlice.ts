@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../app/store'
 import { getImages, imageSearch } from './searchThunk'
+import { Image, ImageSearch, ImageFromAPI } from '../../utils/interfaces'
 
-export interface initialState {
-  data: any,
-  search: any,
+interface initialState {
+  data: ImageFromAPI[],
+  search: ImageFromAPI[],
   status: string,
   error: string | null
 }
@@ -26,7 +27,7 @@ export const searchSlice = createSlice({
     }).addCase(getImages.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.error.message;
-    }).addCase(getImages.fulfilled, (state, action: PayloadAction<any>) => {
+    }).addCase(getImages.fulfilled, (state, action: PayloadAction<ImageFromAPI[]>) => {
         state.status = "fulfilled";
         state.data = action.payload;
     })
@@ -36,7 +37,7 @@ export const searchSlice = createSlice({
     }).addCase(imageSearch.rejected, (state, action) => {
       state.status = "rejected";
       state.error = action.error.message;
-    }).addCase(imageSearch.fulfilled, (state, action) => {
+    }).addCase(imageSearch.fulfilled, (state, action : PayloadAction<ImageSearch>) => {
       state.status = "fulfilled";
       state.search = action.payload.results;
     })

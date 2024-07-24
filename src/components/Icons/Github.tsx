@@ -1,4 +1,6 @@
-export const Github = () => {
+import React from "react"
+
+export const Github : React.FC = () => {
     return <>
         <a href="https://github.com/jaimehu20" target="_blank">
             <svg 

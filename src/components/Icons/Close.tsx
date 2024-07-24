@@ -1,6 +1,10 @@
 import React from "react"
 
-export const Close:React.FC<any> = ({ handleClick }) => {
+interface CloseProps {
+    handleClick: () => void;
+}
+
+export const Close:React.FC<CloseProps> = ({ handleClick }) => {
     return <>
         <svg  onClick={handleClick}
             xmlns="http://www.w3.org/2000/svg"  
